@@ -7,9 +7,9 @@
 #include "Button.h"
 #include <Arduino.h>
 
-Button::Button(uint8_t pin)
+Button::Button(uint8_t pin, uint16_t debounce_ms)
 :  _pin(pin)
-,  _delay(100)
+,  _delay(debounce_ms)
 ,  _state(HIGH)
 ,  _has_changed(false)
 ,  _ignore_until(0)
