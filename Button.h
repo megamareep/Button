@@ -23,11 +23,11 @@ class Button
 		const static bool RELEASED = HIGH;
 	
 	private:
-		uint8_t  _pin;
-		uint16_t _delay;
-		bool     _state;
 		uint32_t _ignore_until;
-		bool     _has_changed;
+		uint16_t _delay;
+		uint8_t  _pin;
+		uint8_t  _state : 1;
+		uint8_t  _has_changed : 1;
 };
 
 #endif
