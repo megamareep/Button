@@ -8,10 +8,10 @@
 #include <Arduino.h>
 
 Button::Button(uint8_t pin, uint16_t debounce_ms)
-:  _pin(pin)
+:  _ignore_until(0)
 ,  _delay(debounce_ms)
+,  _pin(pin)
 ,  _state(HIGH)
-,  _ignore_until(0)
 ,  _has_changed(false)
 {
 }
