@@ -1,33 +1,25 @@
-/*
-	Button - a small library for Arduino to handle button debouncing
-	
-	MIT licensed.
-*/
-
-#ifndef Button_h
-#define Button_h
+#pragma once
 #include "Arduino.h"
 
 class Button
 {
 	public:
-		Button(uint8_t pin, uint16_t debounce_ms = 100);
-		void begin();
-		bool read();
-		bool toggled();
+	    enum State : uint8_t
+		{
+			ePressed = LOW,
+			eReleased = HIGH
+		};
+		explicit Button(uint8_t pin, uint16_t debounce_ms = 10);
+
 		bool pressed();
 		bool released();
-		bool has_changed();
-		
-		const static bool PRESSED = LOW;
-		const static bool RELEASED = HIGH;
-	
+		bool uniquePressed();
+		bool uniqueReleased();
 	private:
-		uint32_t _ignore_until;
-		uint16_t _delay;
-		uint8_t  _pin;
-		uint8_t  _state : 1;
-		uint8_t  _has_changed : 1;
+		State read();
+		uint32_t m_ignore_until;//4 bytes
+		const uint16_t m_delay;//2 bytes
+		const uint8_t  m_pin;//1 byte
+		uint8_t m_state : 1; //1
+		uint8_t m_has_changed : 1; //1
 };
-
-#endif
